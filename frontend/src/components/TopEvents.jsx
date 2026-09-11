@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // ─── Swap `image: null` → `image: importedPhoto` nanti ──────────────────────
 // import unguImg from '../assets/events/ungu.jpg'
@@ -34,8 +35,10 @@ function OrgAvatar({ name }) {
 }
 
 function EventCard({ ev }) {
+  const navigate = useNavigate()
   return (
     <div
+      onClick={() => navigate(`/event/${ev.id}`)}
       style={{
         background:'#13131f',
         borderRadius:16,
@@ -176,6 +179,7 @@ function EventCard({ ev }) {
 
           {ev.status !== 'soldout' && (
             <button
+              onClick={() => navigate(`/event/${ev.id}`)}
               style={{
                 flexShrink:0, padding:'7px 16px', borderRadius:9,
                 background:'linear-gradient(135deg,#7c3aed,#ec4899)',

@@ -1,16 +1,15 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express')
+const cors    = require('cors')
+require('dotenv').config()
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({ origin: '*' }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Concert Ticket API berjalan 🚀"
-    });
-});
+app.use('/api', require('./routes/index'))
 
-module.exports = app;
+app.get('/', (_, res) => res.json({ success: true, message: 'KonserKu API 🚀' }))
+
+module.exports = app
