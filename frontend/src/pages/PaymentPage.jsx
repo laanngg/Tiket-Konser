@@ -19,13 +19,13 @@ export default function PaymentPage() {
   const { state } = useLocation()
   const navigate  = useNavigate()
 
-  // If accessed directly without state, show placeholder data
+
   const event      = state?.event      || { id:1, title:'UNGU Final Chapter', venue:'ICE BSD', city:'Tangerang', event_date:'2026-10-30T19:30:00', placeholder:'linear-gradient(135deg,#3b0764,#5b21b6)' }
   const ticketType = state?.ticketType || { name:'Festival', price:550000 }
   const quantity   = state?.quantity   || 1
   const total      = state?.total      || ticketType.price * quantity
 
-  const [step, setStep]       = useState(0) // 0=data, 1=payment, 2=confirm, 3=done
+  const [step, setStep]       = useState(0) 
   const [loading, setLoading] = useState(false)
   const [method, setMethod]   = useState('')
   const [orderResult, setOrderResult] = useState(null)

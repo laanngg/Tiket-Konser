@@ -1,206 +1,193 @@
 const promos = [
   {
-    id: 1, tag: 'LIMITED OFFER', title: 'Early Bird', sub: 'Diskon 30%',
-    desc: 'Pesan tiket lebih awal dan hemat hingga 30% untuk konser pilihan bulan ini.',
-    code: 'EARLYBIRD30', expires: '31 Agustus 2026', emoji: '🎟️',
-    gradFrom: '#5b21b6', gradTo: '#7c3aed',
+    id: 1,
+    tag: 'Penawaran Spesial',
+    title: 'Early Bird',
+    sub: 'Diskon 30%',
+    desc: 'Pesan tiket lebih awal untuk pertunjukan pilihan bulan ini dan dapatkan harga terbaik.',
+    code: 'EARLY30',
+    expires: '31 Agustus 2026',
+    accent: '#d97706',
   },
   {
-    id: 2, tag: 'NEW USER', title: 'Pengguna Baru', sub: 'Bebas Biaya Admin',
-    desc: 'Daftar sekarang dan nikmati pembelian pertama tanpa biaya admin apapun.',
-    code: 'NEWUSER2026', expires: 'Tidak terbatas', emoji: '🎉',
-    gradFrom: '#9f1239', gradTo: '#ec4899',
+    id: 2,
+    tag: 'Pengguna Baru',
+    title: 'Bebas Biaya Admin',
+    sub: 'Hemat 100%',
+    desc: 'Registrasi akun KonserKu hari ini dan nikmati transaksi pertama tanpa biaya pemesanan.',
+    code: 'NEWUSER',
+    expires: 'Periode Terbatas',
+    accent: '#4f46e5',
   },
 ]
 
 const stats = [
-  { icon: '🎫', val: '50.000+', label: 'Tiket Terjual' },
-  { icon: '🎪', val: '500+',    label: 'Event Aktif' },
-  { icon: '🎤', val: '200+',    label: 'Artis Terdaftar' },
-  { icon: '⭐', val: '4.9/5',   label: 'Rating Pengguna' },
+  { val: '50.000+', label: 'Tiket Terjual' },
+  { val: '500+',    label: 'Pertunjukan Live' },
+  { val: '200+',    label: 'Artis & Musisi' },
+  { val: '4.9/5',   label: 'Kepuasan Penonton' },
 ]
 
 export default function PromoSection() {
   return (
     <section style={{
       padding: '96px 0',
-      background: 'linear-gradient(180deg,#0a0a0f,#0d0620 50%,#0a0a0f)',
+      background: '#0c0a14',
     }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px' }}>
 
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 52 }}>
+        <div style={{ marginBottom: 44 }}>
           <p style={{
-            fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.18em',
-            textTransform: 'uppercase', color: '#ec4899', marginBottom: 10,
+            fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.22em',
+            textTransform: 'uppercase', color: '#d97706', marginBottom: 8,
           }}>
-            🎁 Penawaran Spesial
+            Benefit & Penawaran
           </p>
           <h2 style={{
-            fontFamily: 'Poppins,sans-serif',
-            fontSize: 'clamp(1.6rem,3.5vw,2.2rem)',
-            fontWeight: 900, color: '#fff',
+            fontFamily: "'DM Serif Display', Georgia, serif",
+            fontSize: 'clamp(1.9rem, 3.8vw, 2.6rem)',
+            fontWeight: 400, color: '#f8f7f4', lineHeight: 1.15,
+            letterSpacing: '-0.01em', margin: 0,
           }}>
-            Promo &{' '}
-            <span style={{
-              background: 'linear-gradient(135deg,#a78bfa,#ec4899,#f59e0b)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>Diskon</span>
+            Penawaran <span style={{ color: '#d97706', fontStyle: 'italic' }}>Eksklusif</span>
           </h2>
         </div>
 
-        {/* Promo cards — padding lebih besar, min lebih lebar */}
+        {/* Promo cards */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 24, marginBottom: 52,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: 24, marginBottom: 68,
         }}>
           {promos.map(p => (
             <div
               key={p.id}
               style={{
-                borderRadius: 28, padding: '44px 40px',
-                background: `linear-gradient(135deg, ${p.gradFrom}, ${p.gradTo})`,
-                position: 'relative', overflow: 'hidden', cursor: 'pointer',
-                transition: 'transform 0.3s, box-shadow 0.3s',
+                borderRadius: 16,
+                padding: '36px 34px',
+                background: '#12101b',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderTop: `3px solid ${p.accent}`,
+                position: 'relative',
+                transition: 'transform 0.3s ease, border-color 0.3s ease',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.transform  = 'translateY(-6px)'
-                e.currentTarget.style.boxShadow  = '0 28px 56px rgba(0,0,0,0.45)'
+                e.currentTarget.style.transform = 'translateY(-4px)'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.transform  = 'translateY(0)'
-                e.currentTarget.style.boxShadow  = 'none'
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
               }}
             >
-              {/* Glow orb */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.15), transparent 55%)',
-                pointerEvents: 'none',
-              }} />
-              {/* Big emoji bg */}
-              <div style={{
-                position: 'absolute', top: -16, right: -16,
-                fontSize: 120, opacity: 0.1, lineHeight: 1, pointerEvents: 'none',
-              }}>
-                {p.emoji}
-              </div>
-
-              <div style={{ position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
                 <span style={{
-                  display: 'inline-block', padding: '5px 14px', borderRadius: 99,
-                  background: 'rgba(255,255,255,0.18)', color: '#fff',
-                  fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em',
-                  marginBottom: 20,
+                  fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.12em',
+                  textTransform: 'uppercase', color: p.accent,
                 }}>
                   {p.tag}
                 </span>
+                <span style={{ fontSize: '0.72rem', color: '#71717a' }}>
+                  {p.expires}
+                </span>
+              </div>
 
-                <h3 style={{
-                  color: '#fff', fontFamily: 'Poppins,sans-serif',
-                  fontWeight: 800, fontSize: '1.4rem', marginBottom: 6,
-                }}>
-                  {p.title}
-                </h3>
-                <p style={{
-                  color: 'rgba(255,255,255,0.95)', fontWeight: 900,
-                  fontSize: '1.9rem', marginBottom: 14,
-                  fontFamily: 'Poppins,sans-serif',
-                }}>
-                  {p.sub}
-                </p>
-                <p style={{
-                  color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem',
-                  lineHeight: 1.6, marginBottom: 28,
-                }}>
-                  {p.desc}
-                </p>
+              <h3 style={{
+                color: '#f8f7f4',
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontWeight: 400, fontSize: '1.5rem', marginBottom: 6,
+                lineHeight: 1.2,
+              }}>
+                {p.title}
+              </h3>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
-                  {/* Kode */}
-                  <div style={{
-                    display: 'flex', alignItems: 'center', gap: 10,
-                    background: 'rgba(0,0,0,0.28)', border: '1px solid rgba(255,255,255,0.22)',
-                    borderRadius: 12, padding: '10px 18px',
+              <p style={{
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontSize: '2.4rem',
+                marginBottom: 14,
+                color: p.accent,
+                lineHeight: 1.1,
+              }}>
+                {p.sub}
+              </p>
+
+              <p style={{
+                color: '#a1a1aa', fontSize: '0.86rem',
+                lineHeight: 1.6, marginBottom: 28,
+              }}>
+                {p.desc}
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px dashed rgba(255,255,255,0.15)',
+                  borderRadius: 8, padding: '7px 14px',
+                }}>
+                  <span style={{ fontSize: '0.7rem', color: '#71717a' }}>Kode:</span>
+                  <span style={{
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    fontSize: '0.86rem', color: '#f8f7f4', letterSpacing: '0.08em',
                   }}>
-                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)' }}>Kode:</span>
-                    <span style={{
-                      fontFamily: 'monospace', fontWeight: 800,
-                      fontSize: '0.95rem', color: '#fff', letterSpacing: '0.1em',
-                    }}>
-                      {p.code}
-                    </span>
-                    <button style={{
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      color: 'rgba(255,255,255,0.5)', padding: 0, lineHeight: 1,
-                    }}>
-                      <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                      </svg>
-                    </button>
-                  </div>
-                  {/* CTA */}
-                  <button style={{
-                    padding: '10px 22px', borderRadius: 12,
-                    background: '#fff', color: '#111',
-                    fontWeight: 700, fontSize: '0.875rem',
-                    border: 'none', cursor: 'pointer',
-                    transition: 'transform 0.2s',
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.transform='scale(1.04)'}
-                    onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}
-                  >
-                    Pakai Sekarang →
-                  </button>
+                    {p.code}
+                  </span>
                 </div>
 
-                <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: 14 }}>
-                  Berlaku hingga: {p.expires}
-                </p>
+                <button
+                  style={{
+                    padding: '8px 18px', borderRadius: 99,
+                    background: p.accent === '#d97706' ? '#d97706' : '#4f46e5',
+                    color: '#f8f7f4',
+                    fontWeight: 600, fontSize: '0.8rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'opacity 0.2s, transform 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                >
+                  Klaim Promo
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Stats — lebih tinggi */}
+        {/* Stats — minimal editorial divider */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: 20,
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          paddingTop: 48,
         }}>
           {stats.map(s => (
-            <div
-              key={s.label}
-              style={{
-                textAlign: 'center', padding: '36px 24px', borderRadius: 24,
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                transition: 'border-color 0.2s, background 0.2s, transform 0.2s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor  = 'rgba(124,58,237,0.35)'
-                e.currentTarget.style.background   = 'rgba(124,58,237,0.06)'
-                e.currentTarget.style.transform    = 'translateY(-4px)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor  = 'rgba(255,255,255,0.07)'
-                e.currentTarget.style.background   = 'rgba(255,255,255,0.03)'
-                e.currentTarget.style.transform    = 'translateY(0)'
-              }}
-            >
-              <div style={{ fontSize: 40, marginBottom: 12 }}>{s.icon}</div>
+            <div key={s.label} style={{ textAlign: 'left', padding: '0 8px' }}>
               <p style={{
-                fontFamily: 'Poppins,sans-serif', fontWeight: 900,
-                fontSize: '1.8rem', color: '#fff', marginBottom: 6,
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontSize: '2.4rem',
+                color: '#f8f7f4',
+                marginBottom: 4,
+                lineHeight: 1,
               }}>
                 {s.val}
               </p>
-              <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>{s.label}</p>
+              <p style={{
+                color: '#71717a',
+                fontSize: '0.8rem',
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+                margin: 0,
+              }}>
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )

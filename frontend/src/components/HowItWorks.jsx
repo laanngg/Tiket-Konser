@@ -1,139 +1,224 @@
+const SearchIcon = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="7" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+)
+
+const TicketIcon = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M13 5v2" />
+    <path d="M13 17v2" />
+    <path d="M13 11v2" />
+  </svg>
+)
+
+const CardIcon = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+    <line x1="1" y1="10" x2="23" y2="10" />
+  </svg>
+)
+
+const MusicCheckIcon = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18V5l12-2v13" />
+    <circle cx="6" cy="18" r="3" />
+    <circle cx="18" cy="16" r="3" />
+  </svg>
+)
+
+const icons = [SearchIcon, TicketIcon, CardIcon, MusicCheckIcon]
+
 const steps = [
-  { n:'01', icon:'🔍', title:'Cari Event',     desc:'Temukan konser atau event favoritmu dari ribuan pilihan di seluruh Indonesia.',        gradFrom:'#4c1d95', gradTo:'#7c3aed' },
-  { n:'02', icon:'🎫', title:'Pilih Tiket',    desc:'Pilih kategori tiket yang sesuai budget dan preferensi tempat dudukmu.',               gradFrom:'#881337', gradTo:'#ec4899' },
-  { n:'03', icon:'💳', title:'Bayar Mudah',    desc:'Bayar dengan transfer bank, e-wallet, kartu kredit, dan banyak metode lainnya.',       gradFrom:'#0c4a6e', gradTo:'#0ea5e9' },
-  { n:'04', icon:'🎉', title:'Nikmati Konser', desc:'Dapatkan e-tiket di emailmu dan tunjukkan QR code saat masuk ke venue.',               gradFrom:'#78350f', gradTo:'#f59e0b' },
+  {
+    n: '01',
+    title: 'Cari Event',
+    desc: 'Temukan konser atau event favoritmu dari ribuan pilihan di seluruh Indonesia.',
+  },
+  {
+    n: '02',
+    title: 'Pilih Tiket',
+    desc: 'Pilih kategori tiket yang sesuai budget dan preferensi tempat dudukmu.',
+  },
+  {
+    n: '03',
+    title: 'Bayar Mudah',
+    desc: 'Bayar dengan transfer bank, e-wallet, kartu kredit, dan banyak metode lainnya.',
+  },
+  {
+    n: '04',
+    title: 'Nikmati Konser',
+    desc: 'Dapatkan e-tiket di emailmu dan tunjukkan QR code saat masuk ke venue.',
+  },
 ]
 
 export default function HowItWorks() {
   return (
-    <section style={{ padding: '96px 0', background: '#0a0a0f' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
+    <section style={{ padding: '100px 0 88px', background: '#0c0a14' }}>
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px' }}>
 
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
+        {/* ── Header — left-aligned, editorial ── */}
+        <div style={{ marginBottom: 64 }}>
           <p style={{
-            fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.18em',
-            textTransform: 'uppercase', color: '#22d3ee', marginBottom: 10,
+            fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.22em',
+            textTransform: 'uppercase', color: '#d97706', marginBottom: 12,
           }}>
-            ⚡ Mudah & Cepat
+            Panduan Pembelian
           </p>
           <h2 style={{
-            fontFamily: 'Poppins,sans-serif',
-            fontSize: 'clamp(1.6rem,3.5vw,2.2rem)',
-            fontWeight: 900, color: '#fff',
+            fontFamily: "'DM Serif Display', Georgia, serif",
+            fontSize: 'clamp(1.9rem, 4vw, 2.8rem)',
+            fontWeight: 400,
+            color: '#f8f7f4',
+            lineHeight: 1.18,
+            letterSpacing: '-0.01em',
+            margin: 0,
           }}>
-            Cara{' '}
-            <span style={{
-              background: 'linear-gradient(135deg,#a78bfa,#ec4899,#f59e0b)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>Kerja</span>
+            Kemudahan memesan tiket
+            <br />
+            <span style={{ color: '#d97706', fontStyle: 'italic' }}>langsung dari perangkatmu</span>
           </h2>
-          <p style={{ color: '#6b7280', marginTop: 14, fontSize: '0.9rem', maxWidth: 380, margin: '14px auto 0' }}>
-            Beli tiket konser favoritmu dalam 4 langkah mudah, hanya butuh beberapa menit
+          <p style={{
+            color: '#a1a1aa', marginTop: 14, fontSize: '0.9rem',
+            lineHeight: 1.6, maxWidth: 440,
+          }}>
+            Beli tiket konser favoritmu dalam hitungan menit — tanpa antri dan langsung terbit di email.
           </p>
         </div>
 
-        {/* Steps — min 240px, padding lebih besar */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: 24, marginBottom: 60,
-        }}>
-          {steps.map((st, i) => (
-            <div
-              key={st.n}
-              style={{
-                borderRadius: 24, padding: '36px 28px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                textAlign: 'center', position: 'relative',
-                transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, background 0.3s, box-shadow 0.3s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform   = 'translateY(-10px)'
-                e.currentTarget.style.borderColor = `rgba(124,58,237,0.4)`
-                e.currentTarget.style.background  = 'rgba(124,58,237,0.07)'
-                e.currentTarget.style.boxShadow   = '0 20px 40px rgba(124,58,237,0.2)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform   = 'translateY(0)'
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
-                e.currentTarget.style.background  = 'rgba(255,255,255,0.03)'
-                e.currentTarget.style.boxShadow   = 'none'
-              }}
-            >
-              {/* Step number badge */}
-              <div style={{
-                display: 'inline-block', padding: '4px 14px', borderRadius: 99,
-                background: `linear-gradient(135deg,${st.gradFrom},${st.gradTo})`,
-                color: '#fff', fontSize: '0.72rem', fontWeight: 800,
-                marginBottom: 24, letterSpacing: '0.05em',
-              }}>
-                {st.n}
-              </div>
-
-              {/* Icon — lebih besar */}
-              <div style={{
-                width: 80, height: 80, borderRadius: 22, margin: '0 auto 20px',
-                background: `linear-gradient(135deg,${st.gradFrom},${st.gradTo})`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 36,
-                boxShadow: `0 12px 28px rgba(0,0,0,0.35)`,
-              }}>
-                {st.icon}
-              </div>
-
-              <h3 style={{
-                color: '#fff', fontFamily: 'Poppins,sans-serif',
-                fontWeight: 700, fontSize: '1.1rem', marginBottom: 12,
-              }}>
-                {st.title}
-              </h3>
-              <p style={{ color: '#6b7280', fontSize: '0.875rem', lineHeight: 1.65 }}>
-                {st.desc}
-              </p>
-
-              {/* Connector arrow between cards */}
-              {i < steps.length - 1 && (
+        {/* ── Steps — numbered list rows ── */}
+        <div>
+          {steps.map((st, i) => {
+            const Icon = icons[i]
+            return (
+              <div key={st.n}>
+                {/* Divider line */}
                 <div style={{
-                  position: 'absolute', top: '50%', right: -16,
-                  transform: 'translateY(-50%)',
-                  width: 32, height: 32, borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'rgba(255,255,255,0.3)', fontSize: 18,
-                  zIndex: 10,
-                }}>
-                  ›
+                  height: 1,
+                  background: 'rgba(255,255,255,0.06)',
+                }} />
+
+                {/* Step row */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '72px 56px 1fr',
+                    alignItems: 'center',
+                    gap: 24,
+                    padding: '36px 0',
+                    transition: 'background 0.25s ease',
+                    borderRadius: 12,
+                    cursor: 'default',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.02)'
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = 'transparent'
+                  }}
+                >
+                  {/* Oversized serif number */}
+                  <span style={{
+                    fontFamily: "'DM Serif Display', Georgia, serif",
+                    fontSize: '2.5rem',
+                    fontWeight: 400,
+                    lineHeight: 1,
+                    color: '#d97706',
+                    letterSpacing: '-0.02em',
+                  }}>
+                    {st.n}
+                  </span>
+
+                  {/* Icon */}
+                  <div style={{
+                    width: 48, height: 48,
+                    borderRadius: 12,
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: '#d4d4d8',
+                    flexShrink: 0,
+                  }}>
+                    <Icon />
+                  </div>
+
+                  {/* Title + description */}
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Inter', 'Poppins', sans-serif",
+                      fontWeight: 600,
+                      fontSize: '1.05rem',
+                      color: '#e5e7eb',
+                      margin: '0 0 6px',
+                      letterSpacing: '-0.01em',
+                    }}>
+                      {st.title}
+                    </h3>
+                    <p style={{
+                      color: '#6b7280',
+                      fontSize: '0.875rem',
+                      lineHeight: 1.6,
+                      margin: 0,
+                    }}>
+                      {st.desc}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            )
+          })}
+
+          {/* Bottom divider */}
+          <div style={{
+            height: 1,
+            background: 'rgba(255,255,255,0.06)',
+          }} />
         </div>
 
-        {/* CTA */}
-        <div style={{ textAlign: 'center' }}>
+        {/* ── CTA — subtle pill ── */}
+        <div style={{ textAlign: 'center', marginTop: 56 }}>
           <button
             style={{
-              padding: '16px 44px', borderRadius: 18, fontSize: '1rem', fontWeight: 700,
-              color: '#fff', border: 'none', cursor: 'pointer',
-              background: 'linear-gradient(135deg,#7c3aed,#ec4899)',
-              boxShadow: '0 8px 28px rgba(124,58,237,0.4)',
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              padding: '14px 40px',
+              borderRadius: 9999,
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer',
+              background: '#4f46e5',
+              transition: 'background 0.2s ease, transform 0.2s ease',
+              letterSpacing: '0.01em',
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform='translateY(-3px)'; e.currentTarget.style.boxShadow='0 14px 36px rgba(124,58,237,0.55)' }}
-            onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)';    e.currentTarget.style.boxShadow='0 8px 28px rgba(124,58,237,0.4)' }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = '#4338ca'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = '#4f46e5'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
           >
             Mulai Beli Tiket Sekarang
           </button>
-          <p style={{ color: '#4b5563', fontSize: '0.82rem', marginTop: 12 }}>
+          <p style={{ color: '#4b5563', fontSize: '0.8rem', marginTop: 14 }}>
             Tidak perlu mendaftar untuk melihat event
           </p>
         </div>
       </div>
+
+      {/* Responsive mobile override */}
+      <style>{`
+        @media (max-width: 640px) {
+          /* Stack step rows vertically on mobile */
+          section div[style*="gridTemplateColumns"] {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+            padding: 28px 0 !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

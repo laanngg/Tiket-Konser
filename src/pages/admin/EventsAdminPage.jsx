@@ -22,6 +22,9 @@ export default function EventsAdminPage() {
   const [editId, setEditId]   = useState(null)
   const [saving, setSaving]   = useState(false)
   const [del, setDel]         = useState(null)
+  const [search, setSearch]   = useState('')
+  const [filterCat, setFilterCat] = useState('all')
+  const [filterStatus, setFilterStatus] = useState('all')
 
   const load = () => {
     api.get('/events').then(r => setEvents(r.data.data)).catch(() => setEvents(mockEvents)).finally(() => setLoading(false))
@@ -56,11 +59,19 @@ export default function EventsAdminPage() {
 
   const statusColor = s => s==='active'?'#22c55e':s==='soldout'?'#ef4444':'#6b7280'
 
+  const filtered = events.filter(ev => {
+    const q = search.toLowerCase().trim()
+    const matchSearch = !q || ev.title?.toLowerCase().includes(q) || ev.organizer?.toLowerCase().includes(q) || ev.venue?.toLowerCase().includes(q) || ev.city?.toLowerCase().includes(q)
+    const matchCat = filterCat === 'all' || ev.category === filterCat
+    const matchStatus = filterStatus === 'all' || ev.status === filterStatus
+    return matchSearch && matchCat && matchStatus
+  })
+
   return (
     <AdminLayout>
       <div style={{ padding:'32px 28px' }}>
         {/* Header */}
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:28 }}>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:24 }}>
           <div>
             <p style={{ color:'#6b7280', fontSize:'0.8rem', marginBottom:4 }}>Kelola</p>
             <h1 style={{ fontFamily:'Poppins,sans-serif', fontWeight:900, fontSize:'1.6rem', color:'#fff' }}>Events</h1>
@@ -68,6 +79,61 @@ export default function EventsAdminPage() {
           <button onClick={openAdd} style={{ padding:'10px 20px', borderRadius:12, background:'linear-gradient(135deg,#7c3aed,#ec4899)', color:'#fff', fontWeight:700, fontSize:'0.875rem', border:'none', cursor:'pointer', boxShadow:'0 4px 16px rgba(124,58,237,0.35)', display:'flex', alignItems:'center', gap:8 }}>
             + Tambah Event
           </button>
+        </div>
+
+        {/* Filters Toolbar */}
+        <div style={{ display:'flex', gap:12, marginBottom:20, flexWrap:'wrap', alignItems:'center' }}>
+          {/* Search */}
+          <div style={{ position:'relative', flex:1, minWidth:220 }}>
+            <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', fontSize:14, color:'#6b7280' }}>🔍</span>
+            <input
+              value={search}
+              onChange={e=>setSearch(e.target.value)}
+              placeholder="Cari event, venue, kota, organizer..."
+              style={{ width:'100%', padding:'10px 12px 10px 36px', borderRadius:12, border:'1px solid rgba(255,255,255,0.1)', background:'rgba(255,255,255,0.05)', color:'#fff', fontSize:'0.85rem', outline:'none', boxSizing:'border-box' }}
+            />
+            {search && (
+              <button onClick={()=>setSearch('')} style={{ position:'absolute', right:10, top:'50%', transform:'translateY(-50%)', background:'none', border:'none', color:'#9ca3af', cursor:'pointer', fontSize:12 }}>✕</button>
+            )}
+          </div>
+
+          {/* Category Filter */}
+          <select
+            value={filterCat}
+            onChange={e => setFilterCat(e.target.value)}
+            style={{ padding:'10px 14px', borderRadius:12, background:'#1a1a2e', border:'1px solid rgba(255,255,255,0.1)', color:'#e5e7eb', fontSize:'0.85rem', outline:'none', cursor:'pointer' }}
+          >
+            <option value="all">Semua Kategori</option>
+            {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+
+          {/* Status Filter */}
+          <div style={{ display:'flex', gap:6 }}>
+            {['all','active','soldout'].map(s => (
+              <button
+                key={s}
+                onClick={() => setFilterStatus(s)}
+                style={{
+                  padding:'9px 14px', borderRadius:10,
+                  border: filterStatus===s?'none':'1px solid rgba(255,255,255,0.1)',
+                  background: filterStatus===s?'linear-gradient(135deg,#7c3aed,#ec4899)':'rgba(255,255,255,0.05)',
+                  color: filterStatus===s?'#fff':'#9ca3af',
+                  fontWeight:600, fontSize:'0.8rem', cursor:'pointer', textTransform:'capitalize'
+                }}
+              >
+                {s==='all'?'Semua':s}
+              </button>
+            ))}
+          </div>
+
+          {(search || filterCat !== 'all' || filterStatus !== 'all') && (
+            <button
+              onClick={() => { setSearch(''); setFilterCat('all'); setFilterStatus('all') }}
+              style={{ padding:'8px 12px', borderRadius:10, background:'rgba(239,68,68,0.1)', border:'1px solid rgba(239,68,68,0.2)', color:'#f87171', fontSize:'0.78rem', cursor:'pointer', fontWeight:600 }}
+            >
+              Reset
+            </button>
+          )}
         </div>
 
         {/* Table */}
@@ -84,7 +150,9 @@ export default function EventsAdminPage() {
               <tbody>
                 {loading ? (
                   <tr><td colSpan={6} style={{ textAlign:'center', padding:40, color:'#4b5563' }}>⏳ Memuat...</td></tr>
-                ) : events.map((ev, i) => (
+                ) : filtered.length === 0 ? (
+                  <tr><td colSpan={6} style={{ textAlign:'center', padding:40, color:'#4b5563' }}>Tidak ada event yang sesuai dengan filter</td></tr>
+                ) : filtered.map((ev, i) => (
                   <tr key={ev.id} style={{ borderBottom:'1px solid rgba(255,255,255,0.04)', background: i%2===0?'transparent':'rgba(255,255,255,0.01)' }}>
                     <td style={{ padding:'14px 18px', maxWidth:220 }}>
                       <p style={{ fontWeight:600, fontSize:'0.85rem', marginBottom:2, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{ev.title}</p>
@@ -111,6 +179,7 @@ export default function EventsAdminPage() {
               </tbody>
             </table>
           </div>
+          {!loading && <div style={{ padding:'12px 18px', borderTop:'1px solid rgba(255,255,255,0.05)', fontSize:'0.75rem', color:'#6b7280' }}>{filtered.length} dari {events.length} event</div>}
         </div>
 
         {/* Delete confirm */}
